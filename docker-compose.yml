@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  kafka:
+    build: .
+    container_name: kafka-server
+    ports:
+      - "9092:9092"  # Kafka port
+      - "2181:2181"  # Zookeeper port
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    driver: bridge
